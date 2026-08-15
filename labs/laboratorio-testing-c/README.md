@@ -300,7 +300,7 @@ cat salidas/test_integracion.txt
 ```
 
 ```
-TEST_INTEGRACION_PASA=
+TEST_INTEGRACION_PASA=SI
 ```
 _(SI o NO)_
 
@@ -318,7 +318,7 @@ Escribí `test_agregar_hasta_llenar()` en el lugar `/* PARTE E */`. Este test de
 Descomentá `/* test_agregar_hasta_llenar(); */` en el `main()`, compilá y corré.
 
 ```
-TEST_LLENAR_PASA=
+TEST_LLENAR_PASA=SI
 ```
 _(SI o NO)_
 
@@ -337,10 +337,10 @@ Las líneas con `#####` nunca se ejecutaron — no están cubiertas por los test
 
 **P10** — ¿Hay alguna línea de `carrito.c` con `#####`? ¿Cuál y por qué no se ejecutó?
 
-> R:
+> R: Si. Las lineas 29 y 30 no se ejecutaron porque no hay tests que verifiquen el caso en que el carrito esta lleno y se intenta agregar un producto adicional.
 
 ```
-COBERTURA_COMPLETA=
+COBERTURA_COMPLETA=NO
 ```
 _(SI si todas las líneas están cubiertas, NO si hay alguna con #####)_
 
@@ -350,27 +350,27 @@ _(SI si todas las líneas están cubiertas, NO si hay alguna con #####)_
 
 **P11** — ¿Qué diferencia hay entre un test unitario y uno de integración? ¿Cuál de los dos detectó primero el bug de `carrito_total`?
 
-> R:
+> R: Un test unitario verifica el comportamiento de una funcion especifica de manera aislada, mientras que un test de integracion evalua como interactuan multiples funciones entre si. En este caso, el bug de carrito_total fue detectado primero por un test unitario, ya que se centro en la función especifica y su calculo del total.
 
 **P12** — El bug de capacidad en `carrito_agregar` causa un **buffer overflow**: se escribe más allá del array. ¿Por qué esto es peligroso en C pero no ocurriría en un lenguaje como Python o Java?
 
-> R:
+> R: En C, los arrays no tienen verificacion de limites, por lo que escribir mas alla de su tamaño puede sobrescribir memoria adyacente, causando comportamientos indefinidos, corrupcion de datos o vulnerabilidades de seguridad. En lenguajes como Python o Java, los arrays y listas tienen verificación de limites incorporada, lanzando excepciones si se intenta acceder fuera del rango permitido, evitando asi el buffer overflow.
 
 **P13** — En este laboratorio encontraste los bugs escribiendo tests. ¿Qué tiene de mejor este enfoque frente a mirar el código directamente?
 
-> R:
+> R: Escribir tests permite identificar errores de manera objetiva y reproducible, ya que los tests verifican el comportamiento esperado del codigo en diferentes escenarios. Mirar el codigo directamente puede llevar a pasar por alto errores sutiles o asumir que el codigo funciona correctamente sin evidencia. Los tests tambien facilitan la deteccion de regresiones cuando se realizan cambios futuros en el codigo.
 
 **P14** — El test `test_total_precio_unitario` (cantidad = 1) **pasó** a pesar del bug, mientras que `test_total_con_cantidad` (cantidad = 2) **falló**. ¿Por qué el primer test no detectó el bug?
 
-> R:
+> R: El primer test no detecto el bug porque solo verificaba el caso en que la cantidad del producto era 1. En ese caso, el calculo del total no se ve afectado por la multiplicacion de precio por cantidad, ya que cualquier numero multiplicado por 1 es igual a si mismo. Por lo tanto, el bug en la funcion carrito_total no se manifestó en ese escenario especifico. En cambio, el segundo test involucraba una cantidad mayor a 1, lo que demostro el error en el cálculo del total.
 
 ```
-BUG_EN_FUNCION_1=
+BUG_EN_FUNCION_1=carrito_total
 ```
 _(nombre de la función con el primer bug)_
 
 ```
-BUG_EN_FUNCION_2=
+BUG_EN_FUNCION_2=carrito_agregar
 ```
 _(nombre de la función con el segundo bug)_
 
