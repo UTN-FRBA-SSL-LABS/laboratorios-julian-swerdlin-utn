@@ -13,6 +13,14 @@
 
 int main(int argc, char *argv[]) {
     (void)argc; (void)argv;
-    /* TODO */
+    int todos_iguales = 1;
+    char *primer_arg = argv[1];
+    for (char **arg = argv + 2; *arg != NULL; arg++) {
+        if (!AreEqual(*arg, primer_arg)) {
+            todos_iguales = 0;
+            break;
+        }
+    }
+    printf("%d\n", todos_iguales);
     return 0;
 }
